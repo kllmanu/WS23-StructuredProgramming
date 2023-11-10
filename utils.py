@@ -12,5 +12,5 @@ def test(fn, *args, **kwargs):
 
     result = fn(*args, **kwargs)
 
-    if result:
-        print(result)
+    if result is not None:
+        print('  ', result)
