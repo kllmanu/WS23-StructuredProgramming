@@ -74,8 +74,6 @@ def calc_local_minima_maxima(zahlenreihe):
     minima = 0
     maxima = 0
 
-    print(zahlenreihe)
-
     for i, num in enumerate(zahlenreihe):
         if i == 0 or i+1 > len(zahlenreihe) - 1:
             continue
