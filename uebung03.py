@@ -1,4 +1,4 @@
-"""Strukturierte Programmierung: Übung 2"""
+"""Strukturierte Programmierung: Übung 3"""
 
 from utils import test
 from uebung02 import is_leap_year
