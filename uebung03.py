@@ -11,6 +11,13 @@ def russische_bauernmultiplikation(m, n):
 
     a) Erklären Sie das Verfahren
     b) Entwickeln Sie einen Algorithmus für das Verfahren als Struktogramm dar
+
+    1. Man schreibt die beiden zu multiplizierenden Zahlen nebeneinander.
+    2. Auf der linken Seite (Multiplikator) werden die Zahlen jeweils halbiert (Reste abgerundet) und die
+       Ergebnisse untereinander geschrieben, bis man zur 1 gelangt.
+    3. Auf der rechten Seite (Multiplikand) werden die Zahlen verdoppelt und untereinander geschrieben.
+    4. Die rechts stehenden (verdoppelten) Zahlen werden gestrichen, wenn die links stehende Zahl gerade ist.
+    5. Die Summe der nicht gestrichenen rechts stehenden Zahlen ergibt das gesuchte Produkt.
     """
     lcol = [m]
     rcol = [n]
