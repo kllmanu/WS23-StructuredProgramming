@@ -33,7 +33,6 @@ def russische_bauernmultiplikation(m, n):
 
     return sum(rcol)
 
-
 def tag_im_jahr(year, month, day):
     """2. Tag im Jahr
 
@@ -82,6 +81,8 @@ def calc_local_minima_maxima(zahlenreihe):
     maxima = 0
 
     for i, num in enumerate(zahlenreihe):
+
+        # skip first and last number
         if i == 0 or i+1 > len(zahlenreihe) - 1:
             continue
 
@@ -91,7 +92,7 @@ def calc_local_minima_maxima(zahlenreihe):
         if before < num and after < num:
             maxima += 1
 
-        if before > num and after > num:
+        elif before > num and after > num:
             minima += 1
 
     return minima, maxima
