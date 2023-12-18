@@ -1,6 +1,7 @@
 """Strukturierte Programmierung: Übung 8"""
 
-from utils import test
+import random
+from utils import test, colors, formats
 
 def add_item_to_backpack(item, loaded_items, backpack_size):
     """Add a single item with its max amount to the backpack"""
@@ -55,7 +56,7 @@ def load_backpack(backpack_size, items):
 
     return loaded_items, loaded_items_value
 
-def newtons_method(fn, tn, x = 0.5, border = 0.001, runs = 100):
+def newtons_method(fn, tn, x = 0.5, border = 0.001, runs = 10):
     """2. Newtonsches Näherungsverfahren
 
     https://en.wikipedia.org/wiki/Newton%27s_method
@@ -93,26 +94,31 @@ def newtons_method(fn, tn, x = 0.5, border = 0.001, runs = 100):
     """
     pass
 
-def render_pascals_triangle(data):
+def print_triangle(data):
     padding = len(data) * 8
+    color = random.choice(list(colors.values()))
+
+    print(color)
 
     for i, row in enumerate(data):
         i += 1
 
         if i == 1:
-            print(('╱╲'.center(8) * i).center(padding))
+            print(('╱╲' * i).center(padding))
 
-        print(('╱  ╲'.center(6) * i).center(padding))
-        print(('╱ {:02d} ╲'.center(8) * i).format(*row).center(padding))
+        print((' ╱  ╲ ' * i).center(padding))
+        print(('╱ {:02d} ╲' * i).format(*row).center(padding))
 
         if i == len(data):
-            print((' ‾‾‾‾ '.center(6) * i).center(padding))
+            print((' ‾‾‾‾ ' * i).center(padding))
         elif i == 1:
             print(('╱╲‾‾‾‾╱╲' * i).center(padding))
         elif i == 2:
             print(('╱╲‾‾‾‾╱' + '╲‾‾‾‾╱╲').center(padding))
         else:
             print(('╱╲‾‾‾‾╱' + '╲‾‾‾‾╱' * (i-2) + '╲‾‾‾‾╱╲').center(padding))
+
+    print(formats['reset'])
 
 
 def pascals_triangle(ext):
@@ -175,7 +181,7 @@ def pascals_triangle(ext):
         n += 1
 
     else:
-        render_pascals_triangle(data[:ext+1])
+        print_triangle(data[:ext+1])
 
 
 if __name__ == '__main__':
@@ -204,7 +210,7 @@ if __name__ == '__main__':
         },
     ]
 
-    # test(load_backpack, 10, items)
+    test(load_backpack, 10, items)
     # test(load_backpack, 5, items)
     # test(load_backpack, 25, items)
 
@@ -233,7 +239,7 @@ if __name__ == '__main__':
     #     },
     # ])
 
-    # test(newtons_method, lambda x: (2 * x) ** 2 + 3 * x - 5, lambda x: 4 * x + 3)
+    # test(newtons_method, lambda x: 2 * x ** 2 + 3 * x - 5, lambda x: 4 * x + 3)
 
     # test(pascals_triangle, 0)
     # test(pascals_triangle, 1)
