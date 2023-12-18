@@ -8,8 +8,7 @@ def add_item_to_backpack(item, loaded_items, backpack_size):
     quantity = 0
 
     for q in range(0, item['quantity']):
-        loaded_items_size = sum(item['quantity'] for item in loaded_items)
-        print(loaded_items_size)
+        loaded_items_size = sum(item['quantity'] for item in loaded_items) + quantity
 
         if loaded_items_size < backpack_size:
             quantity += 1
@@ -38,7 +37,7 @@ def load_backpack(backpack_size, items):
     | Füllfeder   |         1 | € 5,-  |
     | Radiergummi |        40 | € 0,50 |
     | Kreide      |       100 | € 0,10 |
-    
+
     Optimale Bepackung:
     1 x Füllfeder, 3 x Filzstift, 6 x Radiergummi => 11€
 
@@ -56,7 +55,7 @@ def load_backpack(backpack_size, items):
 
     return loaded_items, loaded_items_value
 
-def newtons_method():
+def newtons_method(fn, tn, x = 0.5, border = 0.001, runs = 100):
     """2. Newtonsches Näherungsverfahren
 
     https://en.wikipedia.org/wiki/Newton%27s_method
@@ -71,11 +70,11 @@ def newtons_method():
     entsprechendes Python-Programm um. Überlegen Sie sich eine sinnvolle
     Strukturierung.
 
-    f(x) = 2x2 + 3x – 5
+    f(x) = 2x² + 3x – 5
     f'(x) = 4x + 3
 
     function f(x) {
-        return 2x2 + 3x – 5
+        return 2x² + 3x – 5
     }
 
     function f'(x) {
@@ -94,7 +93,29 @@ def newtons_method():
     """
     pass
 
-def pascals_triangle():
+def render_pascals_triangle(data):
+    padding = len(data) * 8
+
+    for i, row in enumerate(data):
+        i += 1
+
+        if i == 1:
+            print(('╱╲'.center(8) * i).center(padding))
+
+        print(('╱  ╲'.center(6) * i).center(padding))
+        print(('╱ {:02d} ╲'.center(8) * i).format(*row).center(padding))
+
+        if i == len(data):
+            print((' ‾‾‾‾ '.center(6) * i).center(padding))
+        elif i == 1:
+            print(('╱╲‾‾‾‾╱╲' * i).center(padding))
+        elif i == 2:
+            print(('╱╲‾‾‾‾╱' + '╲‾‾‾‾╱╲').center(padding))
+        else:
+            print(('╱╲‾‾‾‾╱' + '╲‾‾‾‾╱' * (i-2) + '╲‾‾‾‾╱╲').center(padding))
+
+
+def pascals_triangle(ext):
     """3. Pascal’sches Dreieck
 
     https://en.wikipedia.org/wiki/Pascal%27s_triangle
@@ -105,19 +126,23 @@ def pascals_triangle():
     die jeweils ein Dreieck mehr als die vorherige enthält, ein neues
     gleichseitiges Dreieck erzeugt.
 
-                   ╱╲
-                  ╱  ╲
-                 ╱ 01 ╲ ................... Anfangssituation
-                ╱╲‾‾‾‾╱╲
-               ╱  ╲  ╱  ╲
-              ╱ 01 ╲╱ 01 ╲ ................ 1. Erweiterung
-             ╱╲‾‾‾‾╱╲‾‾‾‾╱╲
-            ╱  ╲  ╱  ╲  ╱  ╲
-           ╱ 01 ╲╱ 02 ╲╱ 01 ╲ ............. 2. Erweiterung
-          ╱╲‾‾‾‾╱╲‾‾‾‾╱╲‾‾‾‾╱╲
-         ╱  ╲  ╱  ╲  ╱  ╲  ╱  ╲
-        ╱ 01 ╲╱ 03 ╲╱ 03 ╲╱ 01 ╲ .......... 3. Erweiterung
-         ‾‾‾‾  ‾‾‾‾  ‾‾‾‾  ‾‾‾‾  
+                       ╱╲
+                      ╱  ╲
+                     ╱ 01 ╲ ................... Anfangssituation
+                    ╱╲‾‾‾‾╱╲
+                   ╱  ╲  ╱  ╲
+                  ╱ 01 ╲╱ 01 ╲ ................ 1. Erweiterung
+                 ╱╲‾‾‾‾╱╲‾‾‾‾╱╲
+                ╱  ╲  ╱  ╲  ╱  ╲
+               ╱ 01 ╲╱ 02 ╲╱ 01 ╲ ............. 2. Erweiterung
+              ╱╲‾‾‾‾╱╲‾‾‾‾╱╲‾‾‾‾╱╲
+             ╱  ╲  ╱  ╲  ╱  ╲  ╱  ╲
+            ╱ 01 ╲╱ 03 ╲╱ 03 ╲╱ 01 ╲ .......... 3. Erweiterung
+           ╱╲‾‾‾‾╱╲‾‾‾‾╱╲‾‾‾‾╱╲‾‾‾‾╱╲ 
+          ╱  ╲  ╱  ╲  ╱  ╲  ╱  ╲  ╱  ╲
+         ╱ 01 ╲╱ 04 ╲╱ 06 ╲╱ 04 ╲╱ 01 ╲ ....... 4. Erweiterung
+          ‾‾‾‾  ‾‾‾‾  ‾‾‾‾  ‾‾‾‾  ‾‾‾‾
+
     Jedem Dreieck ist ein numerischer Wert zugeordnet. Dreiecke am
     Rand haben der Wert 1, andere berechnen ihren Wert aus der Summe
     der Nachbarn in der vorherigen Zeile. Mathematisch lässt sich der
@@ -134,13 +159,29 @@ def pascals_triangle():
     aus. Beachten Sie, dass die Werte des Dreiecks nicht gespeichert
     werden dürfen.
     """
-    pass
+    data = [[1], [1, 1]]
+    n = 2
+
+    while n <= ext:
+        row = [1, 1]
+        k = 1
+
+        while k < n:
+            col = data[n-1][k-1] + data[n-1][k]
+            row.insert(k, col)
+            k += 1
+        
+        data.append(row)
+        n += 1
+
+    else:
+        render_pascals_triangle(data[:ext+1])
 
 
 if __name__ == '__main__':
     print(__doc__)
 
-    test(load_backpack, 10, [
+    items = [
         {
             'title': 'Filzstift',
             'quantity': 3,
@@ -161,4 +202,41 @@ if __name__ == '__main__':
             'quantity': 100,
             'value': 0.10
         },
-    ])
+    ]
+
+    # test(load_backpack, 10, items)
+    # test(load_backpack, 5, items)
+    # test(load_backpack, 25, items)
+
+    # call by reference problem?
+    # test(load_backpack, 60, items)
+    # test(load_backpack, 60, [
+    #     {
+    #         'title': 'Filzstift',
+    #         'quantity': 3,
+    #         'value': 1
+    #     },
+    #     {
+    #         'title': 'Füllfeder',
+    #         'quantity': 1,
+    #         'value': 5
+    #     },
+    #     {
+    #         'title': 'Radiergummi',
+    #         'quantity': 40,
+    #         'value': 0.50
+    #     },
+    #     {
+    #         'title': 'Kreide',
+    #         'quantity': 100,
+    #         'value': 0.10
+    #     },
+    # ])
+
+    # test(newtons_method, lambda x: (2 * x) ** 2 + 3 * x - 5, lambda x: 4 * x + 3)
+
+    # test(pascals_triangle, 0)
+    # test(pascals_triangle, 1)
+    # test(pascals_triangle, 2)
+    # test(pascals_triangle, 3)
+    test(pascals_triangle, 4)
