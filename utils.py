@@ -18,3 +18,20 @@ def test(fn, *args, **kwargs):
         pprint(result)
 
     tested.append(fn.__name__)
+
+
+colors = {
+    'purple': '\033[95m',
+    'cyan': '\033[96m',
+    'darkcyan': '\033[36m',
+    'blue': '\033[94m',
+    'green': '\033[92m',
+    'yellow': '\033[93m',
+    'red': '\033[91m',
+}
+
+formats = {
+    'bold': '\033[1m',
+    'underline': '\033[4m',
+    'reset': '\033[0m',
+}
